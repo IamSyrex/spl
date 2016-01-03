@@ -19,12 +19,13 @@
 <li>{{book.title}}</li>
 </ul>
 
-            <h1>Books</h1>
+            <h1>{{book.title}}</h1>
 
             <div class="row">
                 <div class="columns large-7">
                     <section class="big-intro">
-                        <p>Find the titles you're looking for, or let our expert readers' advisory staff help you pick out your next great read. Meet other readers and discuss your favorites.<br></p>
+                        <p>{{book.description}}<br></p>
+                        <p>Author: {{book.author}}<br></p>
                     </section>
                 </div>
                 <div class="columns large-4">
@@ -47,9 +48,10 @@
 						<p>{{comment.body}}</p>
 						<div class="likes-wrapper">
 						<ul>
-						<li>{{comment.voteup}}<i class="fa fa-thumbs-o-up"></i></li>
-						<li>{{comment.votedown}}<i class="fa fa-thumbs-o-down"></i></li>
+							<li>{{comment.voteup}}<i class="fa fa-thumbs-o-up thumb-it-up" data-toid="response-{{comment.id}}"></i></li>
+							<li>{{comment.votedown}}<i class="fa fa-thumbs-o-down thumb-it-down" data-toid="response-{{comment.id}}"></i></li>
 						</ul>
+						<div class="response" id="response-{{comment.id}}"></div>
 						</div>
                     </section>
 					{% endfor %}
