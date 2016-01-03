@@ -1,0 +1,27 @@
+cd /home/django/django_project/
+python manage.py shell
+
+
+python manage.py dbshell
+bE3GqxKVWN
+
+
+from spl.models import Books
+books = Books(title='First Book Title',subtitle='First Book SubTitle',description='First book short description',published_date='2013-05-03',pages=5543,slug='book-1',author='John Doe')
+books.save()
+books = Books(title='Second Book Title',subtitle='Second Book SubTitle',description='Second book short description',published_date='2003-09-23',pages=43,slug='book-2-long-slug-yeah-yes',author='Jane Smith')
+books.save()
+books = Books(title='Third Book Title',subtitle='Third First Book SubTitle',description='Third book short description',published_date='1913-02-09',pages=543,slug='book-3-Third-Third',author='Jimmy Butler')
+books.save()
+
+
+
+from comments.models import Comments
+comment = Comments(user_id=1,book_id=1,subject='First Comment for first book',body='This is a very cool book!',author='Jimmy Johns',voteup=0,votedown=0,created_at='2013-05-03 11:20:13',updated_at='2013-05-03 11:20:13')
+comment.save()
+comment = Comments(user_id=1,book_id=2,subject='First Comment for second book',body='This is an ok book!',author='Abraham Lincoln',voteup=0,votedown=0,created_at='2003-05-03 11:20:13',updated_at='2013-05-03 11:20:13')
+comment.save()
+comment = Comments(user_id=1,book_id=3,subject='First Comment for third book',body='Did not like this one too much!!',author='George Washington',voteup=0,votedown=0,created_at='2013-02-03 11:20:13',updated_at='2013-05-03 11:20:13')
+comment.save()
+comment = Comments(user_id=1,book_id=1,subject='Second Comment for first book',body='This is a very cool book!',author='Mr. Steal Yo',voteup=0,votedown=0,created_at='2013-05-03 11:20:13',updated_at='2013-05-03 11:20:13')
+comment.save()

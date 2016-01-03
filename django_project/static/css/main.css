@@ -1,3 +1,23 @@
 body {
 	background-color:transparent;
 }
+.likes-wrapper {
+    width: 100%;
+    text-align: right;
+}
+.likes-wrapper ul {
+    display: inline-block;
+    width: 100%;
+    padding: 0;
+    list-style: none;
+    margin: 0;
+}
+.likes-wrapper ul li {
+    display: inline-table;
+    padding-left: 30px;
+}
+.likes-wrapper ul li i {
+    padding: 10px;
+    padding-left: 10px;
+    cursor: pointer;
+}

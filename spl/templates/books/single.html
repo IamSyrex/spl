@@ -1,51 +1,65 @@
 {% extends "main/base.html" %}
 {% block content %}
-<section class="large-feature">
-  <div class="layer">
+<main id="content2" class="row" role="main">
 
+      <div class="columns">
+
+        
+        
+        
+
+<article class="page-content">
     <div class="row">
-      <div class="small-12 medium-10 columns small-centered main-search-bin" id="search-bin">
-        <div class="main-search show" id="search-bar">
+        <div class="columns large-12">
 
-          <input type="text" name="target" class="search-input homepage-search track" placeholder="Search the catalog" id="search-query" data-ga-category="Search" data-ga-action="Click" data-ga-label="Input box">
+            
+            <ul class="breadcrumbs">
+<li><a href="/">Home</a> >> </li>
+<li><a href="/books/">Books</a> >> </li>
+<li>{{book.title}}</li>
+</ul>
 
-          <select id="search-type">
-            <option>Catalog</option>
-            <option>Website</option>
-          </select>
+            <h1>Books</h1>
 
-          <span id="search-icon" onClick="submitSearch('homepage')" class="track" data-ga-category="Search" data-ga-action="Click" data-ga-label="Submit">
-            <?xml version="1.0" encoding="utf-8"?>
-            <!-- Generator: Adobe Illustrator 17.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-            <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin-top: 5px;" x="0px" y="0px" width="28px" height="28px" viewBox="0 0 100 100" fill="#706259" xml:space="preserve">
-            <path d="M86.464,79.452l-8.547-8.547l-6.808-6.808c3.502-4.926,5.582-10.93,5.582-17.422c0-16.639-13.537-30.176-30.176-30.176
-              S16.341,30.036,16.341,46.675c0,16.638,13.535,30.174,30.174,30.174c6.951,0,13.341-2.385,18.447-6.348l11.7,11.7
-              c0.144,0.144,0.305,0.258,0.462,0.377l3.107,3.107L86.464,79.452z M46.517,69.751C33.793,69.75,23.442,59.398,23.442,46.676
-              c0-12.724,10.352-23.075,23.075-23.075s23.075,10.351,23.075,23.075c0,5.294-1.809,10.163-4.82,14.061
-              c-0.995,1.287-2.113,2.475-3.354,3.527C57.394,67.678,52.196,69.751,46.517,69.751z"/>
-            </svg>
-          </span>
-
+            <div class="row">
+                <div class="columns large-7">
+                    <section class="big-intro">
+                        <p>Find the titles you're looking for, or let our expert readers' advisory staff help you pick out your next great read. Meet other readers and discuss your favorites.<br></p>
+                    </section>
+                </div>
+                <div class="columns large-4">
+                    <div class="side-featured-bin">
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="columns large-7">
+				{% if c == 0 %}
+					<section class="content">
+                        <h2>No Review</h2>
+						<p>Be the first to review this book!</p>
+                    </section>
+				{% else %}
+					{% for comment in comments %}
+                    <section class="content">
+                        <h2>{{comment.subject}}</h2>
+						<p>{{comment.body}}</p>
+						<div class="likes-wrapper">
+						<ul>
+						<li>{{comment.voteup}}<i class="fa fa-thumbs-o-up"></i></li>
+						<li>{{comment.votedown}}<i class="fa fa-thumbs-o-down"></i></li>
+						</ul>
+						</div>
+                    </section>
+					{% endfor %}
+				{% endif %}
+                </div>
+            </div>
         </div>
-      </div>
-      <div class="small-12 medium-10 columns small-centered large-feature-text">
-
-        
-          <a href="http://readingclubs.skokielibrary.info" class="track" data-ga-category="Feature" data-ga-action="Click" data-ga-label="Winter Reading animated header">Do new things in 2016 with our Winter Reading Club. <span>LEARN MORE<i class="arrow"></i><i class="arrow"></i><i class="arrow"></i></span></a>
-        
-      </div>
     </div>
-  </div> <!-- end of layer -->
-</section>
-	{{book.title}}
+</article>
+      </div>
+    </main>
 	<hr>
-	{% if c == 0 %}
-		<p>No Comments</p>
-	{% else %}
-		{% for comment in comments %}
-			{{comment.subject}}
-			<hr>
-		{% endfor %}
-	{% endif %}
 {% endblock %}
