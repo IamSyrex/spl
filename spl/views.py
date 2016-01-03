@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.contrib import auth
 from django.core.context_processors import csrf
+from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
 def home(request):
@@ -46,8 +47,77 @@ def hello(request):
 	html = t.render(Context({'name':name}))
 	return HttpResponse(html)
 
-# Create your views here.
+
+def account(request):
+	if request.user.is_authenticated():
+		return render_to_response('main/account.html', {'userdetails':request.user})
+	else:
+		c = {}
+		c.update(csrf(request))
+		return render_to_response('main/login.html',c)
+
 def login(request):
 	c = {}
 	c.update(csrf(request))
 	return render_to_response('main/login.html',c)
+
+
+def logout(request):
+	auth.logout(request)
+	return render_to_response('main/login.html',{'error':'You are now logged out.'})
+
+def auth_view(request):
+	username = request.POST.get('username','')
+	password = request.POST.get('password','')
+	user = auth.authenticate(username=username,password=password)
+	
+	if user is not None:
+		auth.login(request, user)
+		return HttpResponseRedirect('/books/')
+	else:
+		return render_to_response('main/login.html',{'error':'Incorrect username or password'})
+	
+
+def signup(request):
+	if request.method=='POST':
+		form = UserCreationForm(request.POST)
+		if form.is_valid():
+			form.save()
+			#require email and send activation code etc here...
+			return HttpResponseRedirect('/accounts/login/',{'error':'Your account is now created. Please login.'})
+	
+
+def register(request):
+	args = {}
+	args.update(csrf(request))
+	args['form'] = UserCreationForm()
+	
+	return render_to_response('main/register.html',args)
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

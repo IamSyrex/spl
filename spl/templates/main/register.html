@@ -1,0 +1,26 @@
+{% extends "main/base.html" %}
+{% block content %}
+    <main id="content" class="row" role="main">
+      <div class="columns">
+      </div>
+    </main>
+<section class="large-feature">
+  <div class="layer">
+    <div class="row">
+	</div>
+  </div> <!-- end of layer -->
+</section>
+<main id="content2" class="row" role="main">
+	<br><br><br>
+	<div class="columns">
+		<form action="/accounts/signup/" method="post">{% csrf_token %}
+		{{form}}
+		<input type="submit" name="submit" value="Register" id="register-submit">
+		</form>
+		{% if error %}
+			<div class="response error">{{error}}</div>
+		{% endif %}
+	</div>
+</main>
+
+{% endblock %}
