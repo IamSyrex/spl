@@ -1,0 +1,8 @@
+{% extends "main/base.html" %}
+{% block content %}
+	<ul>
+	{% for book in books %}
+		<li style="color:{% cycle 'blue' 'green' %}">{{book.title}}</li>
+	{% endfor %}
+	</ul>
+{% endblock %}
