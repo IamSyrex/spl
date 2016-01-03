@@ -5,10 +5,13 @@ from spl.models import Books
 from comments.models import Comments
 from django.template.loader import get_template
 from django.template import Context
+from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect
+from django.contrib import auth
+from django.core.context_processors import csrf
 
 # Create your views here.
 def home(request):
-	
 	name = 'HOME INDEX'
 	t = get_template('main/home.html')
 	html = t.render(Context({'name':name,'books':Books.objects.all()}))
@@ -42,3 +45,9 @@ def hello(request):
 	t = get_template('spl/home.html')
 	html = t.render(Context({'name':name}))
 	return HttpResponse(html)
+
+# Create your views here.
+def login(request):
+	c = {}
+	c.update(csrf(request))
+	return render_to_response('main/login.html',c)
