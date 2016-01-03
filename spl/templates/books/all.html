@@ -2,7 +2,7 @@
 {% block content %}
 	<ul>
 	{% for book in books %}
-		<li style="color:{% cycle 'blue' 'green' %}">{{book.title}}</li>
+		<li style="color:{% cycle 'blue' 'green' %}"><a href="/books/details/{{book.slug}}">{{book.title}}</a></li>
 	{% endfor %}
 	</ul>
 {% endblock %}

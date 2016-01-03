@@ -7,7 +7,8 @@ class Books(models.Model):
 	description = models.TextField()
 	published_date = models.DateField()
 	pages = models.IntegerField()
-	slug = models.TextField()
+	slug = models.TextField(max_length=255)
+	author = models.TextField(max_length=255)
 	
 	# python manage.py syncdb
 	# python manage.py shell

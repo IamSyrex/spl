@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.shortcuts import render_to_response
 from django.http import HttpResponse
-from .models import Books
+from spl.models import Books
+from comments.models import Comments
 from django.template.loader import get_template
 from django.template import Context
 
@@ -18,11 +19,12 @@ def home(request):
 	# return render_to_response("main/home.html", {'hello': "Hello World!",'books':Books.objects.all()})
 
 
-def book(request, article_id=0):
-	book = Books.objects.get(id=book_id)
-	name = 'book'
+def book(request, book_slug=0):
+	book = Books.objects.get(slug=book_slug)
+	comments = Comments.objects.filter(book_id=book.id)
+	c = comments.count
 	t = get_template('books/single.html')
-	html = t.render(Context({'name':name,'books':books}))
+	html = t.render(Context({'name':'single.html','book':book,'comments':comments,'c':c}))
 	return HttpResponse(html)
 
 

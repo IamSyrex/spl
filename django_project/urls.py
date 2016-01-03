@@ -12,5 +12,5 @@ urlpatterns = patterns('',
 
     url(r'^$', 'spl.views.home', name='home'),
     url(r'^hello/', 'spl.views.hello', name='hello'),
-    url(r'^books/', include('spl.urls')),
+    (r'^books/', include('spl.urls')),
 )
