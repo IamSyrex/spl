@@ -1,0 +1,49 @@
+{% extends "main/base.html" %}
+{% block content %}
+<main id="content2" class="row" role="main">
+
+      <div class="columns">
+
+        
+        
+        
+
+<article class="page-content">
+    <div class="row">
+        <div class="columns large-12">
+            <ul class="breadcrumbs">
+<li><a href="/">Home</a> >> </li>
+<li><a href="/books/">Comment</a> >> </li>
+<li>{{comment.subject}}</li>
+</ul>
+
+            <h1>{{comment.subject}}</h1>
+
+            <div class="row">
+                <div class="columns large-7">
+                    <section class="big-intro">
+						<form action="/comments/update/" method="post">{% csrf_token %}
+							<input type="hidden" name="data" value="{{comment.id}}">
+							<textarea name="comment">{{comment.body}}</textarea>
+							<input type='submit' value='Edit'>
+						</form>
+                    </section>
+                </div>
+                <div class="columns large-4">
+                    <div class="side-featured-bin">
+                        <p>Author: {{comment.author}}<br></p>
+					</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="columns large-7">
+				
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+      </div>
+    </main>
+	<hr>
+{% endblock %}

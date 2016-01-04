@@ -25,18 +25,17 @@
                 <div class="columns large-7">
                     <section class="big-intro">
                         <p>{{book.description}}<br></p>
-                        <p>Author: {{book.author}}<br></p>
                     </section>
                 </div>
                 <div class="columns large-4">
                     <div class="side-featured-bin">
-                        
-                    </div>
+                        <p>Author: {{book.author}}<br></p>
+					</div>
                 </div>
             </div>
             <div class="row">
                 <div class="columns large-7">
-				{% if c == 0 %}
+				{% if cs == 0 %}
 					<section class="content">
                         <h2>No Review</h2>
 						<p>Be the first to review this book!</p>
@@ -45,7 +44,12 @@
 					{% for comment in comments %}
                     <section class="content">
                         <h2>{{comment.subject}}</h2>
-						<p>{{comment.body}}</p>
+                        <span class="review-author">{{comment.author}}</span>
+							<p>{{comment.body}}</p>
+						{% if userdetails.is_staff %}
+							<p><a href="/comments/edit/{{comment.id}}">Edit Comment</a></p>
+						{% endif %}
+                        <span class="review-date">{{comment.created_at}}</span>
 						<div class="likes-wrapper">
 						<ul>
 							<li>{{comment.voteup}}<i class="fa fa-thumbs-o-up thumb-it-up" data-toid="response-{{comment.id}}"></i></li>

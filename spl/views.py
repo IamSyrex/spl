@@ -5,6 +5,7 @@ from spl.models import Books
 from comments.models import Comments
 from django.template.loader import get_template
 from django.template import Context
+from django.template import RequestContext
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 from django.contrib import auth
@@ -26,9 +27,15 @@ def home(request):
 def book(request, book_slug=0):
 	book = Books.objects.get(slug=book_slug)
 	comments = Comments.objects.filter(book_id=book.id)
-	c = comments.count
+	cs = comments.count
+	c = {}
+	c.update(csrf(request))
+	if request.user.is_authenticated():
+		userdetails = request.user
+	else:
+		userdetails = None
 	t = get_template('books/single.html')
-	html = t.render(Context({'name':'single.html','book':book,'comments':comments,'c':c}))
+	html = t.render(Context({'name':'single.html','book':book,'comments':comments,'userdetails':userdetails,'cs':cs}, c))
 	return HttpResponse(html)
 
 
@@ -93,6 +100,31 @@ def register(request):
 	args['form'] = UserCreationForm()
 	
 	return render_to_response('main/register.html',args)
+	
+
+def commentedit(request, comment_id):
+	comment = Comments.objects.get(id=comment_id)
+	c = {}
+	c.update(csrf(request))
+	if request.user.is_authenticated():
+		userdetails = request.user
+	else:
+		userdetails = None
+	if userdetails.is_staff:
+		t = get_template('comments/single.html')
+		html = t.render(Context({'name':'single.html','comment':comment,'userdetails':userdetails}))
+		return HttpResponse(html)
+		# return render_to_response('comments/single.html',c)
+	else:
+		return HttpResponseRedirect('/books/')
+	
+
+def commentupdate(request):
+	# comment = request.POST.get('comment','')
+	# data = request.POST.get('data','')
+	# data = request.POST.get('data','')
+	# user = auth.authenticate(username=username,password=password)
+	return HttpResponseRedirect('/books/')
 	
 	
 	

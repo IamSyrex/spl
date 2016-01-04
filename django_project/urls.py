@@ -21,4 +21,6 @@ urlpatterns = patterns('',
 	url(r'^accounts/invalid/$', 'spl.views.invalid', name='invalid'),
 	url(r'^accounts/register/$', 'spl.views.register', name='register'),
 	url(r'^accounts/signup/$', 'spl.views.signup', name='signup'),
+	url(r'^comments/edit/(?P<comment_id>[\w-]+)/$', 'spl.views.commentedit', name='commentedit'),
+	url(r'^comments/update/$', 'spl.views.commentupdate', name='commentupdate'),
 )
