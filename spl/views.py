@@ -111,20 +111,22 @@ def commentedit(request, comment_id):
 	else:
 		userdetails = None
 	if userdetails.is_staff:
-		t = get_template('comments/single.html')
-		html = t.render(Context({'name':'single.html','comment':comment,'userdetails':userdetails}))
-		return HttpResponse(html)
-		# return render_to_response('comments/single.html',c)
+		c['comment'] = comment
+		c['userdetails'] = userdetails
+		return render_to_response('comments/single.html',c)
 	else:
 		return HttpResponseRedirect('/books/')
 	
 
 def commentupdate(request):
-	# comment = request.POST.get('comment','')
-	# data = request.POST.get('data','')
-	# data = request.POST.get('data','')
-	# user = auth.authenticate(username=username,password=password)
-	return HttpResponseRedirect('/books/')
+	comment = request.POST.get('comment','')
+	data = request.POST.get('data','')
+	c = Comments.objects.get(id=data)
+	c.body = comment
+	c.save()
+	thisbook = Books.objects.get(id=c.book_id)
+	slug = thisbook.slug
+	return HttpResponseRedirect('/books/details/'+slug)
 	
 	
 	
